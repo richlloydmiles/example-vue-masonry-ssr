@@ -13,7 +13,9 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "nuxt": "^1.0.0-rc8"
+    "nuxt": "^1.0.0-rc8",
+    "vue-masonry": "^0.10.12",
+    "vue-no-ssr": "^0.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

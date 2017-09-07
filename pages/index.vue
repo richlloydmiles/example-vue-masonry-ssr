@@ -12,6 +12,14 @@
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
         <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
       </div>
+
+      <no-ssr>
+        <div v-masonry transition-duration="3s" item-selector=".item" class="masonry-container">
+          <div v-masonry-tile class="item" :key="index" v-for="(item, index) in blocks">
+            <p>{{item.title}} - {{index}}</p>
+          </div>
+        </div>
+      </no-ssr>
     </div>
   </section>
 </template>
@@ -19,9 +27,32 @@
 <script>
 import Logo from '~/components/Logo.vue'
 
+import NoSSR from 'vue-no-ssr'
 export default {
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App',
+      blocks: [
+        {
+          title: 'nice block'
+        },
+        {
+          title: 'another shiny block'
+        },
+        {
+          title: 'the last block'
+        }
+      ]
+    }
+  },
+  mounted () {
+    if (typeof this.$redrawVueMasonry === 'function') {
+      this.$redrawVueMasonry()
+    }
+  },
   components: {
-    Logo
+    Logo,
+    'no-ssr': NoSSR
   }
 }
 </script>
@@ -55,4 +86,15 @@ export default {
 .links {
   padding-top: 15px;
 }
+
+.item {
+  border: 1px solid #ac0;
+  width: 200px;
+}
+
+.masonry-container {
+  width: 55%;
+  margin: 0 auto;
+}
+
 </style>
